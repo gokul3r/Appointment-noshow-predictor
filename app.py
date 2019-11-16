@@ -24,7 +24,7 @@ def predict():
 
     output = round(prediction[0], 2) * 100
 
-    return render_template('index.html', prediction_text='The possibility of the patient reaching hospital is {}%'.format(output))
+    return render_template('index.html', prediction_text='The possibility of this appointment success is {}%'.format(output))
 
 @app.route('/predict_api',methods=['POST'])
 def predict_api():
