@@ -6,7 +6,7 @@ from flask import Flask, request, jsonify, render_template
 import pickle
 
 app = Flask(__name__)
-model = pickle.load(open('show_pred_model_1.pkl', 'rb'))
+model = pickle.load(open('model_appointment_predictor_12042019.pkl', 'rb'))
 
 @app.route('/')
 def home():
@@ -20,11 +20,10 @@ def predict():
     int_features = [int(x) for x in request.form.values()]
     final_features = [np.array(int_features)]
     prediction = model.predict_proba(final_features)[0]
-    
 
     output = round(prediction[0], 2) * 100
 
-    return render_template('index.html', prediction_text='The possibility of this appointment success is {}%'.format(output))
+    return render_template('index.html', prediction_text="The possibility of the patient reaching hospital for this appointment is {}%".format(output))
 
 @app.route('/predict_api',methods=['POST'])
 def predict_api():
